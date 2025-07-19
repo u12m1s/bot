@@ -1,0 +1,29 @@
+# Python specific
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environment
+venv/
+.venv/
+env/
+*.env
+
+# Database files
+*.db
+*.sqlite
+identifier.sqlite # Specific to your project
+data.db # Specific to your project
+routes.db # Specific to your project
+
+# IDEs
+.idea/ # PyCharm project files
+.vscode/ # VS Code project files
+
+# Operating System
+.DS_Store # macOS specific
+
+# Other project-specific
+*.zip
+# photos/ # Uncomment this if you DON'T want photos in Git
