@@ -2,6 +2,7 @@ import logging
 import asyncio
 import json
 import os
+import sys
 
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.enums import ParseMode
@@ -25,6 +26,7 @@ from aiogram.filters import CommandStart
 from config import BOT_TOKEN
 from db import get_routes_by_city_and_interest, get_route_by_id
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
