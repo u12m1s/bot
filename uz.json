@@ -1,0 +1,11 @@
+{
+  "choose_language": "Tilni tanlang",
+  "choose_city": "Shaharni tanlang",
+  "choose_interest": "Qiziqishni tanlang",
+  "choose_route": "Marshrutni tanlang",
+  "no_routes_found": "😕 Hozircha marshrutlar mavjud emas. Boshqa variantni tanlang.",
+  "back": "🔙 Orqaga",
+  "back_to_routes": "Marshrutga qaytish",
+  "route_not_found": "😕 Marshrut topilmadi.",
+  "no_interest_selected": "Iltimos, avval qiziqish turini tanlang."
+}

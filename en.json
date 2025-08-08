@@ -1,0 +1,11 @@
+{
+  "choose_language": "Choose a language",
+  "choose_city": "Choose a city",
+  "choose_interest": "Choose an interest",
+  "choose_route": "Choose a route",
+  "no_routes_found": "😕 Routes are currently unavailable. Try a different option.",
+  "back": "🔙 Back",
+  "back_to_routes": "Back to routes",
+  "route_not_found": "😕 Route not found.",
+  "no_interest_selected": "Please select an interest first."
+}

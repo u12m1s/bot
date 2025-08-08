@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
 
-BOT_TOKEN = '7153572367:AAHMFvGDCmukbfPI4flFHIUKDN4QeDUnR7Q'
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
