@@ -1,3 +1,3 @@
 aiogram==3.0.0b7
 python-dotenv
-aiohttp==3.9.0b0  # Версия с поддержкой Python 3.11
+aiohttp~=3.8.4  # Совместимая версия с aiogram 3.0.0b7
