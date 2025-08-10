@@ -4,6 +4,7 @@ import json
 import os
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 from aiogram.types import (
     Message,
     ReplyKeyboardMarkup,
@@ -357,7 +358,7 @@ async def process_interest(message: Message, state: FSMContext):
         await message.answer(t("no_routes", lang))
         return
 
-    # Создаем клавиатуру с маршрутами
+    # Создаем клавиатуру с маршрутами (убираем ReplyKeyboardMarkup)
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
                             [InlineKeyboardButton(text=route["title"], callback_data=f"route_{route['id']}")]
@@ -370,9 +371,17 @@ async def process_interest(message: Message, state: FSMContext):
         ]]
     )
 
-    await message.answer(t("choose_route", lang), reply_markup=keyboard)
+    # Отправляем сообщение с инлайн-клавиатурой и убираем ReplyKeyboard
+    await message.answer(
+        t("choose_route", lang),
+        reply_markup=ReplyKeyboardRemove()  # Это убирает меню кнопок внизу
+    )
+    await message.answer(
+        t("choose_route", lang),
+        reply_markup=keyboard
+    )
     await state.set_state(StateGroup.route)
-
+    await state.set_state(StateGroup.route)
 
 @dp.callback_query(F.data.startswith("route_"))
 async def show_route_details(callback: CallbackQuery, state: FSMContext):
@@ -470,6 +479,9 @@ async def back_to_interests(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
     data = await state.get_data()
     lang = data.get("lang", "ru")
+
+    # Удаляем предыдущее сообщение с инлайн-клавиатурой
+    await callback.message.delete()
 
     interest_keyboard = ReplyKeyboardMarkup(
         keyboard=[
