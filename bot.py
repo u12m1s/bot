@@ -535,11 +535,14 @@ async def start_webapp():
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
 
+from db import init_db, add_route, get_routes_by_city_and_interest
+
 async def main():
-    logging.info("Starting bot...")
-    await init_db()                      # теперь подключает PostgreSQL
-    asyncio.create_task(start_webapp())  # HTTP-сервер для health-check
-    await dp.start_polling(bot)
+    await init_db()
+    await add_route("Ташкент", "history", "Описание RU", "Description EN", "Tavsif UZ")
+    routes = await get_routes_by_city_and_interest("Ташкент", "history")
+    print(routes)
+
 
 
 if __name__ == "__main__":
