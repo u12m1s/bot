@@ -41,3 +41,13 @@ async def get_route_by_id(route_id: int):
         )
         return await cursor.fetchone()
 
+async def add_route(city, interest, description_ru, description_en, description_uz):
+    async with aiosqlite.connect(DB_PATH) as conn:
+        await conn.execute(
+            """
+            INSERT INTO routes (city, interest, description_ru, description_en, description_uz)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (city, interest, description_ru, description_en, description_uz)
+        )
+        await conn.commit()
