@@ -1,0 +1,20 @@
+# render.yaml — Blueprint
+services:
+  - type: web
+    name: aiogram-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: routes-db
+          property: connectionString
+
+databases:
+  - name: routes-db
+    plan: free

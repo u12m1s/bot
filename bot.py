@@ -1,5 +1,6 @@
 import logging
 import asyncio
+from aiohttp import web
 import json
 import os
 from aiogram import Bot, Dispatcher, F, types
@@ -520,11 +521,26 @@ async def process_place(message: Message, state: FSMContext):
     await message.answer(f"Вы выбрали: {message.text}")
     # Дальнейшая обработка...
 
+
+async def health(request):
+    return web.Response(text="ok")
+
+async def start_webapp():
+    app = web.Application()
+    app.add_routes([web.get("/", health), web.get("/healthz", health)])
+    runner = web.AppRunner(app)
+    await runner.setup()
+    import os
+    port = int(os.getenv("PORT", "10000"))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+
 async def main():
-    """Запуск бота"""
     logging.info("Starting bot...")
-    await init_db()
+    await init_db()                      # теперь подключает PostgreSQL
+    asyncio.create_task(start_webapp())  # HTTP-сервер для health-check
     await dp.start_polling(bot)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
